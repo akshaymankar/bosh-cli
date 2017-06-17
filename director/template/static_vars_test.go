@@ -4,7 +4,7 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 
-	. "github.com/cloudfoundry/bosh-cli/director/template"
+	. "github.com/akshaymankar/int-yaml/director/template"
 )
 
 var _ = Describe("StaticVariables", func() {
