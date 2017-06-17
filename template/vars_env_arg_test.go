@@ -6,7 +6,7 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 
-	. "github.com/akshaymankar/int-yaml/director/template"
+	. "github.com/akshaymankar/int-yaml/template"
 )
 
 var _ = Describe("VarsEnvArg", func() {

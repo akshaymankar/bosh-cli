@@ -5,7 +5,7 @@ import (
 	. "github.com/onsi/gomega"
 	"testing"
 
-	. "github.com/akshaymankar/int-yaml/director/template"
+	. "github.com/akshaymankar/int-yaml/template"
 )
 
 func TestReg(t *testing.T) {
