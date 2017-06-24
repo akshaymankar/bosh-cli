@@ -1,23 +1,63 @@
-hash: da87c8b5eb7a53d6132c75c9c0d8d9cda84407cc46e9891151db64bdec7de1b6
-updated: 2017-06-17T10:05:08.027990197+01:00
+hash: 810b072f92ae4c27e6a279b74341be08b4eb6ec92fd724c22d596d61ed01dc54
+updated: 2017-06-24T14:25:11.045921107+01:00
 imports:
 - name: github.com/bmatcuk/doublestar
   version: dd6a6f0a8cdfaaa88b08cf26cf1bc7d69003ee13
 - name: github.com/charlievieth/fs
   version: 7dc373669fa10ddf827c37c595dee30a2f001be9
 - name: github.com/cloudfoundry/bosh-utils
-  version: ff59874992800c74d1f73768b46a101d7ce57760
+  version: 833257efc00aee289992e3c49551121850208c36
   subpackages:
   - errors
   - logger
   - system
   - system/fakes
+- name: github.com/cloudfoundry/config-server
+  version: 74ae6becea4c6ad14b9c1956c4d4e51e4914d3a2
+  subpackages:
+  - types
+  - types/typesfakes
 - name: github.com/cppforlife/go-patch
   version: 37a72c69d59809d4d5aa0b2aff033e74b8014390
   subpackages:
   - patch
+- name: github.com/jessevdk/go-flags
+  version: 48cf8722c3375517aba351d1f7577c40663a4407
+- name: github.com/mattn/go-isatty
+  version: fc9e8d8ef48496124e79ae0df75490096eccf6fe
 - name: github.com/nu7hatch/gouuid
   version: 179d4d0c4d8d407a32af483c2354df1d2c91e6c3
+- name: github.com/onsi/gomega
+  version: 334b8f472b3af5d541c5642701c1e29e2126f486
+  subpackages:
+  - format
+  - internal/assertion
+  - internal/asyncassertion
+  - internal/oraclematcher
+  - internal/testingtsupport
+  - matchers
+  - matchers/support/goraph/bipartitegraph
+  - matchers/support/goraph/edge
+  - matchers/support/goraph/node
+  - matchers/support/goraph/util
+  - types
+- name: github.com/vito/go-interact
+  version: 6928e8fe3693603deb4d861856effaee10db7bcf
+  subpackages:
+  - interact
+  - interact/terminal
+- name: golang.org/x/crypto
+  version: adbae1b6b6fb4b02448a0fc0dbbc9ba2b95b294d
+  subpackages:
+  - curve25519
+  - ed25519
+  - ed25519/internal/edwards25519
+  - ssh
+  - ssh/terminal
+- name: golang.org/x/sys
+  version: fb4cac33e3196ff7f507ab9b2d2a44b0142f5b5a
+  subpackages:
+  - unix
 - name: gopkg.in/yaml.v2
   version: cd8b52f8269e0feb286dfeef29f8fe4d5b397e0b
 testImports:
@@ -41,21 +81,3 @@ testImports:
   - reporters/stenographer/support/go-colorable
   - reporters/stenographer/support/go-isatty
   - types
-- name: github.com/onsi/gomega
-  version: 334b8f472b3af5d541c5642701c1e29e2126f486
-  subpackages:
-  - format
-  - internal/assertion
-  - internal/asyncassertion
-  - internal/oraclematcher
-  - internal/testingtsupport
-  - matchers
-  - matchers/support/goraph/bipartitegraph
-  - matchers/support/goraph/edge
-  - matchers/support/goraph/node
-  - matchers/support/goraph/util
-  - types
-- name: golang.org/x/sys
-  version: fb4cac33e3196ff7f507ab9b2d2a44b0142f5b5a
-  subpackages:
-  - unix

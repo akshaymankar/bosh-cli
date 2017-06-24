@@ -3,13 +3,27 @@ import:
 - package: github.com/cloudfoundry/bosh-utils
   subpackages:
   - errors
+  - logger
   - system
+- package: github.com/cloudfoundry/config-server
+  version: ~0.0.125
+  subpackages:
+  - types
 - package: github.com/cppforlife/go-patch
   subpackages:
   - patch
+- package: github.com/jessevdk/go-flags
+  version: ~1.2.0
+- package: github.com/mattn/go-isatty
+  version: ~0.0.2
+- package: github.com/onsi/gomega
+  version: ~1.1.0
+  subpackages:
+  - types
+- package: github.com/vito/go-interact
+  subpackages:
+  - interact
 - package: gopkg.in/yaml.v2
 testImport:
 - package: github.com/onsi/ginkgo
-  version: ^1.3.1
-- package: github.com/onsi/gomega
-  version: ^1.1.0
+  version: ~1.3.1
