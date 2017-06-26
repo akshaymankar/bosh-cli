@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"fmt"
 	"io/ioutil"
 	"os"
 
@@ -16,7 +15,6 @@ type FileBytesArg struct {
 }
 
 func (a *FileBytesArg) UnmarshalFlag(data string) error {
-	fmt.Println("Data: %s", data)
 	if len(data) == 0 {
 		return bosherr.Errorf("Expected file path to be non-empty")
 	}
