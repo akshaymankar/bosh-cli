@@ -3,20 +3,20 @@ package cmd
 import (
 	cfgtypes "github.com/cloudfoundry/config-server/types"
 
-	boshtpl "github.com/akshaymankar/int-yaml/template"
+	template "github.com/akshaymankar/int-yaml/template"
 )
 
 // Shared
 type VarFlags struct {
-	VarKVs      []boshtpl.VarKV       `long:"var"        short:"v" value-name:"VAR=VALUE" description:"Set variable"`
-	VarFiles    []boshtpl.VarFileArg  `long:"var-file"             value-name:"VAR=PATH"  description:"Set variable to file contents"`
-	VarsFiles   []boshtpl.VarsFileArg `long:"vars-file"  short:"l" value-name:"PATH"      description:"Load variables from a YAML file"`
-	VarsEnvs    []boshtpl.VarsEnvArg  `long:"vars-env"             value-name:"PREFIX"    description:"Load variables from environment variables (e.g.: 'MY' to load MY_var=value)"`
-	VarsFSStore VarsFSStore           `long:"vars-store"           value-name:"PATH"      description:"Load/save variables from/to a YAML file"`
+	VarKVs      []template.VarKV       `long:"var"        short:"v" value-name:"VAR=VALUE" description:"Set variable"`
+	VarFiles    []template.VarFileArg  `long:"var-file"             value-name:"VAR=PATH"  description:"Set variable to file contents"`
+	VarsFiles   []template.VarsFileArg `long:"vars-file"  short:"l" value-name:"PATH"      description:"Load variables from a YAML file"`
+	VarsEnvs    []template.VarsEnvArg  `long:"vars-env"             value-name:"PREFIX"    description:"Load variables from environment variables (e.g.: 'MY' to load MY_var=value)"`
+	VarsFSStore VarsFSStore            `long:"vars-store"           value-name:"PATH"      description:"Load/save variables from/to a YAML file"`
 }
 
-func (f VarFlags) AsVariables() boshtpl.Variables {
-	var firstToUse []boshtpl.Variables
+func (f VarFlags) AsVariables() template.Variables {
+	var firstToUse []template.Variables
 
 	firstToUse = append(firstToUse, f.kvsAsVars())
 
@@ -38,7 +38,7 @@ func (f VarFlags) AsVariables() boshtpl.Variables {
 		firstToUse = append(firstToUse, store)
 	}
 
-	vars := boshtpl.NewMultiVars(firstToUse)
+	vars := template.NewMultiVars(firstToUse)
 
 	if f.VarsFSStore.IsSet() {
 		store.ValueGeneratorFactory = cfgtypes.NewValueGeneratorConcrete(NewVarsCertLoader(vars))
@@ -47,8 +47,8 @@ func (f VarFlags) AsVariables() boshtpl.Variables {
 	return vars
 }
 
-func (f VarFlags) kvsAsVars() boshtpl.Variables {
-	vars := boshtpl.StaticVariables{}
+func (f VarFlags) kvsAsVars() template.Variables {
+	vars := template.StaticVariables{}
 
 	for _, kv := range f.VarKVs {
 		vars[kv.Name] = kv.Value

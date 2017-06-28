@@ -10,7 +10,7 @@ import (
 	. "github.com/onsi/gomega"
 
 	. "github.com/akshaymankar/int-yaml/cmd"
-	boshtpl "github.com/akshaymankar/int-yaml/template"
+	template "github.com/akshaymankar/int-yaml/template"
 )
 
 var _ = Describe("VarsFSStore", func() {
@@ -33,7 +33,7 @@ var _ = Describe("VarsFSStore", func() {
 		It("returns value and found if store finds variable", func() {
 			fs.WriteFileString("/file", "key: val")
 
-			val, found, err := store.Get(boshtpl.VariableDefinition{Name: "key"})
+			val, found, err := store.Get(template.VariableDefinition{Name: "key"})
 			Expect(val).To(Equal("val"))
 			Expect(found).To(BeTrue())
 			Expect(err).ToNot(HaveOccurred())
@@ -45,14 +45,14 @@ var _ = Describe("VarsFSStore", func() {
 			})
 
 			It("returns nil and not found if variable type is not available", func() {
-				val, found, err := store.Get(boshtpl.VariableDefinition{Name: "key2"})
+				val, found, err := store.Get(template.VariableDefinition{Name: "key2"})
 				Expect(val).To(BeNil())
 				Expect(found).To(BeFalse())
 				Expect(err).ToNot(HaveOccurred())
 			})
 
 			It("tries to generate value and save it if variable type is available", func() {
-				val, found, err := store.Get(boshtpl.VariableDefinition{Name: "key2", Type: "password"})
+				val, found, err := store.Get(template.VariableDefinition{Name: "key2", Type: "password"})
 				Expect(len(val.(string))).To(BeNumerically(">", 10))
 				Expect(found).To(BeTrue())
 				Expect(err).ToNot(HaveOccurred())
@@ -61,7 +61,7 @@ var _ = Describe("VarsFSStore", func() {
 			})
 
 			It("returns error if variable type is not known", func() {
-				val, found, err := store.Get(boshtpl.VariableDefinition{Name: "key2", Type: "unknown"})
+				val, found, err := store.Get(template.VariableDefinition{Name: "key2", Type: "unknown"})
 				Expect(val).To(BeNil())
 				Expect(found).To(BeFalse())
 				Expect(err).To(HaveOccurred())
@@ -77,7 +77,7 @@ var _ = Describe("VarsFSStore", func() {
 
 				store.ValueGeneratorFactory = factory
 
-				val, found, err := store.Get(boshtpl.VariableDefinition{Name: "key2", Type: "type"})
+				val, found, err := store.Get(template.VariableDefinition{Name: "key2", Type: "type"})
 				Expect(val).To(BeNil())
 				Expect(found).To(BeFalse())
 				Expect(err).To(HaveOccurred())
@@ -87,7 +87,7 @@ var _ = Describe("VarsFSStore", func() {
 			It("returns error if writing file fails", func() {
 				fs.WriteFileError = errors.New("fake-err")
 
-				val, found, err := store.Get(boshtpl.VariableDefinition{Name: "key2", Type: "password"})
+				val, found, err := store.Get(template.VariableDefinition{Name: "key2", Type: "password"})
 				Expect(val).To(BeNil())
 				Expect(found).To(BeFalse())
 				Expect(err).To(HaveOccurred())
@@ -97,7 +97,7 @@ var _ = Describe("VarsFSStore", func() {
 
 		Context("when store does not find backing file", func() {
 			It("tries to generate value and save it if variable type is available", func() {
-				val, found, err := store.Get(boshtpl.VariableDefinition{Name: "key2", Type: "password"})
+				val, found, err := store.Get(template.VariableDefinition{Name: "key2", Type: "password"})
 				Expect(len(val.(string))).To(BeNumerically(">", 10))
 				Expect(found).To(BeTrue())
 				Expect(err).ToNot(HaveOccurred())
@@ -108,7 +108,7 @@ var _ = Describe("VarsFSStore", func() {
 			fs.WriteFileString("/file", "contents")
 			fs.ReadFileError = errors.New("fake-err")
 
-			_, _, err := store.Get(boshtpl.VariableDefinition{})
+			_, _, err := store.Get(template.VariableDefinition{})
 			Expect(err).To(HaveOccurred())
 			Expect(err.Error()).To(ContainSubstring("fake-err"))
 		})
@@ -116,7 +116,7 @@ var _ = Describe("VarsFSStore", func() {
 		It("returns an error if parsing file fails", func() {
 			fs.WriteFileString("/file", "content")
 
-			_, _, err := store.Get(boshtpl.VariableDefinition{})
+			_, _, err := store.Get(template.VariableDefinition{})
 			Expect(err).To(HaveOccurred())
 			Expect(err.Error()).To(ContainSubstring("Deserializing variables file store '/file'"))
 		})
@@ -132,7 +132,7 @@ var _ = Describe("VarsFSStore", func() {
 			fs.WriteFileString("/file", "key1: val\nkey2: {key3: nested}")
 
 			defs, err := store.List()
-			Expect(defs).To(ConsistOf([]boshtpl.VariableDefinition{{Name: "key1"}, {Name: "key2"}}))
+			Expect(defs).To(ConsistOf([]template.VariableDefinition{{Name: "key1"}, {Name: "key2"}}))
 			Expect(err).ToNot(HaveOccurred())
 		})
 

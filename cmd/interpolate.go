@@ -1,14 +1,13 @@
 package cmd
 
 import (
+	"github.com/akshaymankar/int-yaml/template"
+	appui "github.com/akshaymankar/int-yaml/ui"
 	"github.com/cppforlife/go-patch/patch"
-
-	boshtpl "github.com/akshaymankar/int-yaml/template"
-	boshui "github.com/akshaymankar/int-yaml/ui"
 )
 
 type InterpolateCmd struct {
-	ui boshui.UI
+	ui appui.UI
 }
 
 type InterpolateArgs struct {
@@ -30,16 +29,16 @@ type InterpolateOpts struct {
 
 type command struct{}
 
-func NewInterpolateCmd(ui boshui.UI) InterpolateCmd {
+func NewInterpolateCmd(ui appui.UI) InterpolateCmd {
 	return InterpolateCmd{ui: ui}
 }
 
 func (c InterpolateCmd) Run(opts InterpolateOpts) error {
-	tpl := boshtpl.NewTemplate(opts.Args.Manifest.Bytes)
+	tpl := template.NewTemplate(opts.Args.Manifest.Bytes)
 
 	vars := opts.VarFlags.AsVariables()
 	op := opts.OpsFlags.AsOp()
-	evalOpts := boshtpl.EvaluateOpts{
+	evalOpts := template.EvaluateOpts{
 		ExpectAllKeys:     opts.VarErrors,
 		ExpectAllVarsUsed: opts.VarErrorsUnused,
 	}

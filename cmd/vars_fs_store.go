@@ -6,7 +6,7 @@ import (
 	cfgtypes "github.com/cloudfoundry/config-server/types"
 	"gopkg.in/yaml.v2"
 
-	boshtpl "github.com/akshaymankar/int-yaml/template"
+	template "github.com/akshaymankar/int-yaml/template"
 )
 
 type VarsFSStore struct {
@@ -17,11 +17,11 @@ type VarsFSStore struct {
 	path string
 }
 
-var _ boshtpl.Variables = VarsFSStore{}
+var _ template.Variables = VarsFSStore{}
 
 func (s VarsFSStore) IsSet() bool { return len(s.path) > 0 }
 
-func (s VarsFSStore) Get(varDef boshtpl.VariableDefinition) (interface{}, bool, error) {
+func (s VarsFSStore) Get(varDef template.VariableDefinition) (interface{}, bool, error) {
 	vars, err := s.load()
 	if err != nil {
 		return nil, false, err
@@ -44,7 +44,7 @@ func (s VarsFSStore) Get(varDef boshtpl.VariableDefinition) (interface{}, bool, 
 	return val, true, nil
 }
 
-func (s VarsFSStore) List() ([]boshtpl.VariableDefinition, error) {
+func (s VarsFSStore) List() ([]template.VariableDefinition, error) {
 	vars, err := s.load()
 	if err != nil {
 		return nil, err
@@ -53,7 +53,7 @@ func (s VarsFSStore) List() ([]boshtpl.VariableDefinition, error) {
 	return vars.List()
 }
 
-func (s VarsFSStore) generateAndSet(varDef boshtpl.VariableDefinition) (interface{}, error) {
+func (s VarsFSStore) generateAndSet(varDef template.VariableDefinition) (interface{}, error) {
 	generator, err := s.ValueGeneratorFactory.GetGenerator(varDef.Type)
 	if err != nil {
 		return nil, err
@@ -83,8 +83,8 @@ func (s VarsFSStore) set(key string, val interface{}) error {
 	return s.save(vars)
 }
 
-func (s VarsFSStore) load() (boshtpl.StaticVariables, error) {
-	vars := boshtpl.StaticVariables{}
+func (s VarsFSStore) load() (template.StaticVariables, error) {
+	vars := template.StaticVariables{}
 
 	if s.FS.FileExists(s.path) {
 		bytes, err := s.FS.ReadFile(s.path)
@@ -101,7 +101,7 @@ func (s VarsFSStore) load() (boshtpl.StaticVariables, error) {
 	return vars, nil
 }
 
-func (s VarsFSStore) save(vars boshtpl.StaticVariables) error {
+func (s VarsFSStore) save(vars template.StaticVariables) error {
 	bytes, err := yaml.Marshal(vars)
 	if err != nil {
 		return bosherr.WrapErrorf(err, "Serializing variables")

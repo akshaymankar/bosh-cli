@@ -7,17 +7,17 @@ import (
 	. "github.com/onsi/gomega"
 
 	. "github.com/akshaymankar/int-yaml/cmd"
-	boshtpl "github.com/akshaymankar/int-yaml/template"
+	template "github.com/akshaymankar/int-yaml/template"
 )
 
 var _ = Describe("VarsCertLoader", func() {
 	var (
-		vars   boshtpl.StaticVariables
+		vars   template.StaticVariables
 		loader VarsCertLoader
 	)
 
 	BeforeEach(func() {
-		vars = boshtpl.StaticVariables{}
+		vars = template.StaticVariables{}
 		loader = NewVarsCertLoader(vars)
 	})
 
@@ -95,10 +95,10 @@ type FakeVariables struct {
 	GetErr error
 }
 
-func (v *FakeVariables) Get(varDef boshtpl.VariableDefinition) (interface{}, bool, error) {
+func (v *FakeVariables) Get(varDef template.VariableDefinition) (interface{}, bool, error) {
 	return nil, false, v.GetErr
 }
 
-func (v *FakeVariables) List() ([]boshtpl.VariableDefinition, error) {
+func (v *FakeVariables) List() ([]template.VariableDefinition, error) {
 	return nil, nil
 }

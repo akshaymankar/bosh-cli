@@ -9,19 +9,19 @@ import (
 	bosherr "github.com/cloudfoundry/bosh-utils/errors"
 	"gopkg.in/yaml.v2"
 
-	boshtpl "github.com/akshaymankar/int-yaml/template"
+	template "github.com/akshaymankar/int-yaml/template"
 )
 
 type VarsCertLoader struct {
-	vars boshtpl.Variables
+	vars template.Variables
 }
 
-func NewVarsCertLoader(vars boshtpl.Variables) VarsCertLoader {
+func NewVarsCertLoader(vars template.Variables) VarsCertLoader {
 	return VarsCertLoader{vars}
 }
 
 func (l VarsCertLoader) LoadCerts(name string) (*x509.Certificate, *rsa.PrivateKey, error) {
-	val, found, err := l.vars.Get(boshtpl.VariableDefinition{Name: name})
+	val, found, err := l.vars.Get(template.VariableDefinition{Name: name})
 	if err != nil {
 		return nil, nil, err
 	} else if !found {
