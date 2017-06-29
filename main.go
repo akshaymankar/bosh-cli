@@ -32,7 +32,7 @@ func main() {
 
 	_, err := goflags.ParseArgs(&opts, os.Args[1:])
 	if err != nil {
-		fmt.Errorf(err.Error())
+		fmt.Fprintf(os.Stderr, err.Error())
 		os.Exit(1)
 	}
 
