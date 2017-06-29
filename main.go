@@ -14,12 +14,20 @@ import (
 func main() {
 	logger := boshlogger.NewLogger(boshlogger.LevelInfo)
 
+	fs := boshsys.NewOsFileSystemWithStrictTempRoot(logger)
+
 	opts := cmd.InterpolateOpts{
 		Args: cmd.InterpolateArgs{
 			Manifest: cmd.FileBytesArg{
-				FS: boshsys.NewOsFileSystemWithStrictTempRoot(logger),
+				FS: fs,
 			},
 		},
+		VarFlags: cmd.VarFlags{
+			VarsFSStore: cmd.VarsFSStore{
+				FS: fs,
+			},
+		},
+		OpsFlags: cmd.OpsFlags{},
 	}
 
 	_, err := goflags.ParseArgs(&opts, os.Args[1:])

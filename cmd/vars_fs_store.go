@@ -2,8 +2,10 @@ package cmd
 
 import (
 	bosherr "github.com/cloudfoundry/bosh-utils/errors"
+	boshlog "github.com/cloudfoundry/bosh-utils/logger"
 	boshsys "github.com/cloudfoundry/bosh-utils/system"
 	cfgtypes "github.com/cloudfoundry/config-server/types"
+
 	"gopkg.in/yaml.v2"
 
 	template "github.com/akshaymankar/int-yaml/template"
@@ -116,6 +118,12 @@ func (s VarsFSStore) save(vars template.StaticVariables) error {
 }
 
 func (s *VarsFSStore) UnmarshalFlag(data string) error {
+	//TOOD: Inject FS somehow
+	if s.FS == nil {
+		logger := boshlog.NewLogger(boshlog.LevelInfo)
+		s.FS = boshsys.NewOsFileSystemWithStrictTempRoot(logger)
+	}
+
 	if len(data) == 0 {
 		return bosherr.Errorf("Expected file path to be non-empty")
 	}
