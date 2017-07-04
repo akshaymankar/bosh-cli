@@ -1,0 +1,11 @@
+examples:
+  vars-file:
+    foo: ((simple-entry))
+    bar: ((map-entry.simple-entry))
+    baz: ((map-entry.array-entry))
+  var-file:
+    foo: ((getThisFromVarFile))
+  cli-vars:
+    foo: ((getThisFromVar))
+  env-vars:
+    foo: ((InEnv))

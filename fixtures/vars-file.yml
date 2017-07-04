@@ -1,0 +1,6 @@
+simple-entry: "Simple entry"
+map-entry:
+  simple-entry: "Map simple entry"
+  array-entry:
+    - first element
+    - second element
