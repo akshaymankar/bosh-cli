@@ -99,4 +99,15 @@ songs:
 			Eventually(session.Out).Should(gbytes.Say(expectedOutput))
 		})
 	})
+
+	Describe("Querying", func() {
+		It("should get value of given path", func() {
+			testFile := fixturePath("patch.yml")
+			command := exec.Command(pathToExecutable, testFile, "--path", "/movie")
+			session, err := gexec.Start(command, GinkgoWriter, GinkgoWriter)
+			Expect(err).ToNot(HaveOccurred())
+			Eventually(session).Should(gexec.Exit(0))
+			Eventually(session.Out).Should(gbytes.Say("^Rang de basanti\n$"))
+		})
+	})
 })
