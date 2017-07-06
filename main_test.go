@@ -79,4 +79,24 @@ var _ = Describe("Main", func() {
 			Eventually(session.Out).Should(gbytes.Say(expectedOutput))
 		})
 	})
+
+	Describe("Patching", func() {
+		It("should interpolate with all options", func() {
+			testFile := fixturePath("patch.yml")
+			command := exec.Command(pathToExecutable, testFile, "--ops-file", fixturePath("ops-file.yml"))
+			session, err := gexec.Start(command, GinkgoWriter, GinkgoWriter)
+			Expect(err).ToNot(HaveOccurred())
+			Eventually(session).Should(gexec.Exit(0))
+
+			//If you edit this, remember to convert tabs to spaces
+			expectedOutput := `movie: Rang de basanti
+songs:
+- Khalbali
+- Paathshala
+- Tu bin bataye
+- Luka chuppi`
+
+			Eventually(session.Out).Should(gbytes.Say(expectedOutput))
+		})
+	})
 })
