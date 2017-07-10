@@ -24,7 +24,6 @@ $ int-yaml vijay.yml --var=father_name=Dinanath\ Chauhan --var=father_profession
 ```
 
 #### From files
-**This is broken as of now**
 If you have two files which contain Vijay's father's name and profession
 
 ```
@@ -32,7 +31,6 @@ $ int-yaml vijay.yml --var-file=father_name=father_name.txt --var-file=father_pr
 ```
 
 #### From another YAML
-**This is broken as of now**
 If you have another YAML called `father.yml` which looks like:
 ```
 father_name: Dinanath Chauhan
@@ -53,7 +51,6 @@ $ VIJAY_father_name='Dinanath Chauhan' VIJAY_father_profession='Teacher' int-yam
 ```
 
 ### Edit the YAML (add, delete or replace values)
-**This is broken as of now**
 If you're not familiar with ops files, do checkout [this page from BOSH docs](https://bosh.io/docs/cli-ops-files.html).
 
 So for example, if you want to make vijay.yml about Kancha you could do so with this file (let's say it is `kancha-ops.yml`):
