@@ -1,4 +1,4 @@
-# int-yaml 
+# int-yaml [![Build Status](https://travis-ci.org/akshaymankar/int-yaml.svg?branch=master)](https://travis-ci.org/akshaymankar/int-yaml)
 `int-yaml` is a tool extracted from [bosh-cli](https://github.com/cloudfoundry/bosh-cli). You can do following things with it:
 
 * [Interpolate variables in YAML](#interpolating)
