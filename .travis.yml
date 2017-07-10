@@ -1,0 +1,13 @@
+language: go
+go:
+  - 1.5.x
+  - 1.6.x
+  - 1.7.x
+  - 1.8.x
+
+install:
+  - curl https://glide.sh/get | sh
+  - export PATH=$PATH:$HOME/gopath/bin
+  - glide i
+
+script: $HOME/gopath/bin/ginkgo -r --randomizeAllSpecs --randomizeSuites --race --trace
