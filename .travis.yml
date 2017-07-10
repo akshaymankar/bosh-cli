@@ -1,13 +1,14 @@
 language: go
 go:
-  - 1.5.x
-  - 1.6.x
-  - 1.7.x
   - 1.8.x
-
+addons:
+  apt:
+    sources:
+      - sourceline: 'ppa:masterminds/glide'
+    packages:
+      - glide
 install:
   - mkdir -p $GOPATH/bin
-  - curl https://glide.sh/get | sh
   - export PATH=$PATH:$HOME/gopath/bin
   - glide i
   - go get github.com/onsi/ginkgo/ginkgo
