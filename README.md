@@ -1,13 +1,13 @@
 # int-yaml 
 `int-yaml` is a tool extracted from [bosh-cli](https://github.com/cloudfoundry/bosh-cli). You can do following things with it:
 
-* Interpolate variables
-* Provide ops file(s) to add, delete or replace values
-* Get value of a given key in the yaml
-* All the above
+* [Interpolate variables in YAML](#interpolating)
+* [Patch the YAML](#patching)
+* [Query the YAML](#querying)
+* [All of the above](#all-of-the-above)
 
 ## Examples
-### Interpolate
+### Interpolating
 If you have a YAML file called `vijay.yml` which looks like this:
 
 ```
@@ -50,7 +50,7 @@ For environment variables to work, they'd all need to have a common prefix. Let'
 $ VIJAY_father_name='Dinanath Chauhan' VIJAY_father_profession='Teacher' int-yaml vijay.yml --vars-env=VIJAY
 ```
 
-### Edit the YAML (add, delete or replace values)
+### Patching
 If you're not familiar with ops files, do checkout [this page from BOSH docs](https://bosh.io/docs/cli-ops-files.html).
 
 So for example, if you want to make vijay.yml about Kancha you could do so with this file (let's say it is `kancha-ops.yml`):
@@ -72,7 +72,7 @@ This would produce
   enemy: Vijay
 ```
 
-### Get value of a key
+### Querying
 To get name from a YAML, you can run this:
 ```
 $ int-yaml vijay.yml --path=/name
