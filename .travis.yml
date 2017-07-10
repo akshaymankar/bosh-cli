@@ -6,8 +6,9 @@ go:
   - 1.8.x
 
 install:
+  - mkdir -p $GOPATH/bin
   - curl https://glide.sh/get | sh
   - export PATH=$PATH:$HOME/gopath/bin
   - glide i
 
-script: $HOME/gopath/bin/ginkgo -r --randomizeAllSpecs --randomizeSuites --race --trace
+script: $GOPATH/bin/ginkgo -r --randomizeAllSpecs --randomizeSuites --race --trace
