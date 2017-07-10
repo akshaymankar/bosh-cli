@@ -10,5 +10,7 @@ install:
   - curl https://glide.sh/get | sh
   - export PATH=$PATH:$HOME/gopath/bin
   - glide i
+  - go get github.com/onsi/ginkgo/ginkgo
+  - go install github.com/onsi/ginkgo/ginkgo
 
 script: $GOPATH/bin/ginkgo -r --randomizeAllSpecs --randomizeSuites --race --trace
